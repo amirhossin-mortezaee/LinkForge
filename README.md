@@ -1,826 +1,359 @@
-\# 🚀 LinkForge
-
-
+# 🚀 LinkForge
 
 <p align="center">
-
-&#x20; <strong>A Modern, Fast and Scalable URL Shortener</strong>
-
+  <strong>Modern • Fast • Scalable URL Shortener</strong>
+  <br />
+  Built with ASP.NET Core & Clean Architecture
 </p>
 
+---
 
+## 🇬🇧 English
 
-<p align="center">
+### 📌 About
 
-&#x20; Built with ASP.NET Core and Clean Architecture
+**LinkForge** is a modern, fast, and scalable URL Shortener built with ASP.NET Core.
 
-</p>
+It allows users to convert long URLs into short and shareable links. Users can manage their URLs, create custom aliases, set expiration dates, and track click statistics.
 
+The goal of this project is not simply to create a basic URL Shortener. LinkForge is designed as a portfolio-oriented backend project that demonstrates modern software development practices, clean architecture, scalable design, and production-ready concepts.
 
+---
 
-\---
+### ✨ Features
 
+#### 🔗 URL Management
 
+* Create short URLs
+* Generate unique short codes
+* Redirect users to the original URL
+* Create custom aliases
+* Set expiration dates
+* Activate or deactivate URLs
+* Update and delete URLs
 
-\# 🇬🇧 English
+#### 👤 User Management
 
+* User registration
+* Authentication and authorization
+* JWT Authentication
+* Refresh Tokens
+* Users can manage their own URLs
 
+#### 📊 Analytics
 
-\## 📌 About The Project
+* Total click count
+* Daily, weekly, and monthly statistics
+* Browser information
+* Device information
+* Referrer information
 
+#### ⚡ Performance
 
+* Redis caching
+* Database indexing
+* Optimized URL resolution
+* Cache invalidation
+* Rate limiting
 
-\*\*LinkForge\*\* is a modern, fast, and scalable URL Shortener built with ASP.NET Core.
+#### 🛡️ Security
 
+* JWT Authentication
+* Authorization
+* Input validation
+* URL validation
+* Global exception handling
 
+---
 
-The project allows users to convert long URLs into short and shareable links. Users will be able to manage their links, create custom aliases, set expiration dates, and track click statistics.
+## 🏗️ Architecture
 
-
-
-The main goal of LinkForge is not simply to create a basic URL Shortener. This project is designed as a portfolio-oriented backend application that demonstrates modern software development practices, clean architecture, scalable design, and production-ready concepts.
-
-
-
-\---
-
-
-
-\## ✨ Features
-
-
-
-\### 🔗 URL Management
-
-
-
-\* Create short URLs
-
-\* Generate unique short codes
-
-\* Redirect users to the original URL
-
-\* Create custom aliases
-
-\* Set expiration dates
-
-\* Activate or deactivate URLs
-
-\* Update URLs
-
-\* Delete URLs
-
-
-
-\### 👤 User Management
-
-
-
-\* User registration
-
-\* Authentication
-
-\* JWT Authentication
-
-\* Refresh Tokens
-
-\* Authorization
-
-\* Users can manage their own URLs
-
-
-
-\### 📊 Analytics
-
-
-
-\* Total click count
-
-\* Daily click statistics
-
-\* Weekly statistics
-
-\* Monthly statistics
-
-\* Browser information
-
-\* Device information
-
-\* Referrer information
-
-
-
-\### ⚡ Performance
-
-
-
-\* Redis caching
-
-\* Database indexing
-
-\* Optimized URL resolution
-
-\* Cache invalidation
-
-\* Rate limiting
-
-
-
-\### 🛡️ Security
-
-
-
-\* JWT Authentication
-
-\* Authorization
-
-\* Input validation
-
-\* URL validation
-
-\* Rate limiting
-
-\* Global exception handling
-
-
-
-\---
-
-
-
-\# 🏗️ Architecture
-
-
-
-The project follows the principles of \*\*Clean Architecture\*\*.
-
-
+LinkForge follows the principles of **Clean Architecture**.
 
 ```text
-
 UrlShortener.Domain
-
-&#x20;       ↑
-
+        ↑
 UrlShortener.Application
-
-&#x20;       ↑
-
+        ↑
 UrlShortener.Infrastructure
-
-&#x20;       ↑
-
+        ↑
 UrlShortener.API
-
 ```
 
-
-
-\## Domain
-
-
+### Domain
 
 The core layer of the application.
 
+* Entities
+* Value Objects
+* Domain Interfaces
+* Domain Exceptions
+* Business Rules
 
+> The Domain layer should not depend on external frameworks, databases, or infrastructure.
 
-Responsibilities:
-
-
-
-\* Entities
-
-\* Value Objects
-
-\* Domain Interfaces
-
-\* Domain Exceptions
-
-\* Business Rules
-
-
-
-The Domain layer should not depend on external frameworks, databases, or infrastructure.
-
-
-
-\---
-
-
-
-\## Application
-
-
+### Application
 
 Contains the application's use cases.
 
+* Commands
+* Queries
+* Command Handlers
+* Query Handlers
+* Validation
+* Application Interfaces
 
+The project uses the **CQRS pattern** to separate commands and queries.
 
-Responsibilities:
+### Infrastructure
 
+Contains technical implementations and integrations.
 
+* Entity Framework Core
+* PostgreSQL
+* Redis
+* Authentication
+* Repository implementations
+* External services
 
-\* Commands
-
-\* Queries
-
-\* Command Handlers
-
-\* Query Handlers
-
-\* Validation
-
-\* Application Interfaces
-
-
-
-The project uses the \*\*CQRS pattern\*\* for separating commands and queries.
-
-
-
-\---
-
-
-
-\## Infrastructure
-
-
-
-Contains implementations related to external services and technical concerns.
-
-
-
-Responsibilities:
-
-
-
-\* Database
-
-\* Entity Framework Core
-
-\* PostgreSQL
-
-\* Redis
-
-\* Authentication
-
-\* Repository Implementations
-
-\* External Services
-
-
-
-\---
-
-
-
-\## API
-
-
+### API
 
 The entry point of the application.
 
-
-
-Responsibilities:
-
-
-
-\* Controllers
-
-\* Middleware
-
-\* Authentication Configuration
-
-\* Dependency Injection
-
-\* Swagger Documentation
-
-\* Error Handling
-
-
-
-\---
-
-
-
-\# 🛠️ Tech Stack
-
-
-
-\### Backend
-
-
-
-\* .NET 9
-
-\* ASP.NET Core Web API
-
-\* C#
-
-
-
-\### Architecture
-
-
-
-\* Clean Architecture
-
-\* CQRS
-
-\* Rich Domain Model
-
-\* SOLID Principles
-
-
-
-\### Database
-
-
-
-\* PostgreSQL
-
-\* Entity Framework Core
-
-
-
-\### Tools \& Libraries
-
-
-
-\* MediatR
-
-\* FluentValidation
-
-\* Redis
-
-\* ASP.NET Core Identity
-
-\* JWT Authentication
-
-\* Serilog
-
-\* Swagger / OpenAPI
-
-
-
-\### Testing
-
-
-
-\* xUnit
-
-\* FluentAssertions
-
-
-
-\### DevOps
-
-
-
-\* Docker
-
-\* Docker Compose
-
-\* GitHub Actions
-
-
-
-\---
-
-
-
-\# 📁 Project Structure
-
-
+* Controllers
+* Middleware
+* Authentication configuration
+* Dependency Injection
+* Swagger / OpenAPI
+* Error handling
+
+---
+
+## 🛠️ Tech Stack
+
+| Category          | Technologies                                       |
+| ----------------- | -------------------------------------------------- |
+| **Backend**       | .NET 9, ASP.NET Core Web API, C#                   |
+| **Architecture**  | Clean Architecture, CQRS, Rich Domain Model, SOLID |
+| **Database**      | PostgreSQL, Entity Framework Core                  |
+| **Libraries**     | MediatR, FluentValidation, Redis                   |
+| **Security**      | ASP.NET Core Identity, JWT                         |
+| **Logging**       | Serilog                                            |
+| **Documentation** | Swagger / OpenAPI                                  |
+| **Testing**       | xUnit, FluentAssertions                            |
+| **DevOps**        | Docker, Docker Compose, GitHub Actions             |
+
+---
+
+## 📁 Project Structure
 
 ```text
-
 LinkForge
-
 │
-
 ├── src
-
 │   ├── UrlShortener.Domain
-
 │   ├── UrlShortener.Application
-
 │   ├── UrlShortener.Infrastructure
-
 │   └── UrlShortener.API
-
 │
-
 ├── tests
-
 │
-
 ├── Dockerfile
-
 ├── docker-compose.yml
-
 └── README.md
-
 ```
 
+---
 
+## 🚧 Project Status
 
-\---
+**Status: 🟢 Active Development**
 
+### Development Roadmap
 
+* [x] Create Solution
+* [x] Configure Clean Architecture Layers
+* [x] Configure Project References
+* [ ] Create Domain Entities
+* [ ] Implement Short URL Creation
+* [ ] Implement Short Code Generator
+* [ ] Configure Database
+* [ ] Implement Redirect System
+* [ ] Add Authentication
+* [ ] Add JWT Authentication
+* [ ] Add Redis Cache
+* [ ] Add Analytics
+* [ ] Add Rate Limiting
+* [ ] Add Logging
+* [ ] Add Tests
+* [ ] Add Docker Support
+* [ ] Configure CI/CD
 
-\# 🚧 Project Status
+---
 
+# 🇮🇷 فارسی
 
+## 📌 درباره پروژه
 
-The project is currently under active development.
-
-
-
-\## Development Roadmap
-
-
-
-\* \[x] Create Solution
-
-\* \[x] Configure Clean Architecture Layers
-
-\* \[x] Configure Project References
-
-\* \[ ] Create Domain Entities
-
-\* \[ ] Implement Short URL Creation
-
-\* \[ ] Implement Short Code Generator
-
-\* \[ ] Configure Database
-
-\* \[ ] Implement Redirect System
-
-\* \[ ] Add Authentication
-
-\* \[ ] Add JWT Authentication
-
-\* \[ ] Add Redis Cache
-
-\* \[ ] Add Analytics
-
-\* \[ ] Add Rate Limiting
-
-\* \[ ] Add Logging
-
-\* \[ ] Add Tests
-
-\* \[ ] Add Docker Support
-
-\* \[ ] Configure CI/CD
-
-
-
-\---
-
-
-
-\# 🇮🇷 فارسی
-
-
-
-\## 📌 درباره پروژه
-
-
-
-\*\*LinkForge\*\* یک سرویس مدرن، سریع و مقیاس‌پذیر برای کوتاه‌سازی و مدیریت لینک‌ها است که با استفاده از ASP.NET Core توسعه داده می‌شود.
-
-
+**LinkForge** یک سرویس مدرن، سریع و مقیاس‌پذیر برای کوتاه‌سازی و مدیریت لینک‌ها است که با استفاده از **ASP.NET Core** توسعه داده می‌شود.
 
 این پروژه به کاربران اجازه می‌دهد لینک‌های بلند خود را به لینک‌های کوتاه و قابل اشتراک‌گذاری تبدیل کنند.
 
+کاربران می‌توانند لینک‌های خود را مدیریت کنند، برای آن‌ها نام دلخواه انتخاب کنند، تاریخ انقضا تعیین کنند و آمار بازدید لینک‌های خود را مشاهده کنند.
 
+هدف LinkForge فقط ساخت یک URL Shortener ساده نیست. این پروژه با هدف ساخت یک **Backend حرفه‌ای و نزدیک به محیط Production** طراحی شده است تا مفاهیمی مانند Clean Architecture، CQRS، Authentication، Caching، Testing و Docker در یک پروژه واقعی پیاده‌سازی شوند.
 
-کاربران می‌توانند لینک‌های خود را مدیریت کنند، برای لینک Alias دلخواه انتخاب کنند، تاریخ انقضا تعیین کنند و آمار بازدید لینک‌های خود را مشاهده کنند.
+---
 
+## ✨ قابلیت‌های پروژه
 
+### 🔗 مدیریت لینک‌ها
 
-هدف LinkForge فقط ساخت یک URL Shortener ساده نیست.
+* ساخت لینک کوتاه
+* تولید Short Code منحصربه‌فرد
+* هدایت کاربر به لینک اصلی
+* ایجاد Alias دلخواه
+* تعیین تاریخ انقضا
+* فعال یا غیرفعال کردن لینک
+* ویرایش و حذف لینک
 
+### 👤 مدیریت کاربران
 
+* ثبت‌نام کاربران
+* ورود و احراز هویت
+* JWT Authentication
+* Refresh Token
+* Authorization
+* مدیریت لینک‌های اختصاصی هر کاربر
 
-هدف اصلی این پروژه، ساخت یک Backend حرفه‌ای و نزدیک به محیط Production است که مفاهیمی مانند معماری تمیز، CQRS، Authentication، Caching، Testing و Docker را در یک پروژه واقعی پیاده‌سازی می‌کند.
+### 📊 آمار و Analytics
 
+* تعداد کل کلیک‌ها
+* آمار روزانه
+* آمار هفتگی
+* آمار ماهانه
+* اطلاعات مرورگر
+* اطلاعات دستگاه
+* اطلاعات Referrer
 
+### ⚡ عملکرد
 
-\---
+* Redis Caching
+* Database Indexing
+* بهینه‌سازی فرآیند Redirect
+* Cache Invalidation
+* Rate Limiting
 
+### 🛡️ امنیت
 
+* JWT Authentication
+* Authorization
+* Input Validation
+* اعتبارسنجی URL
+* Rate Limiting
+* Global Exception Handling
 
-\## ✨ قابلیت‌های پروژه
+---
 
+## 🏗️ معماری پروژه
 
-
-\### 🔗 مدیریت لینک‌ها
-
-
-
-\* ساخت لینک کوتاه
-
-\* تولید Short Code منحصربه‌فرد
-
-\* Redirect به لینک اصلی
-
-\* ایجاد Alias دلخواه
-
-\* تعیین تاریخ انقضا
-
-\* فعال یا غیرفعال کردن لینک
-
-\* ویرایش لینک
-
-\* حذف لینک
-
-
-
-\### 👤 مدیریت کاربران
-
-
-
-\* ثبت‌نام
-
-\* ورود به سیستم
-
-\* JWT Authentication
-
-\* Refresh Token
-
-\* Authorization
-
-\* مدیریت لینک‌های اختصاصی هر کاربر
-
-
-
-\### 📊 آمار و Analytics
-
-
-
-\* تعداد کل کلیک‌ها
-
-\* تعداد کلیک‌های روزانه
-
-\* آمار هفتگی
-
-\* آمار ماهانه
-
-\* اطلاعات مرورگر
-
-\* اطلاعات دستگاه
-
-\* اطلاعات Referrer
-
-
-
-\### ⚡ عملکرد
-
-
-
-\* Redis Caching
-
-\* Database Indexing
-
-\* بهینه‌سازی فرآیند Redirect
-
-\* Cache Invalidation
-
-\* Rate Limiting
-
-
-
-\### 🛡️ امنیت
-
-
-
-\* JWT Authentication
-
-\* Authorization
-
-\* Validation
-
-\* اعتبارسنجی لینک‌ها
-
-\* Rate Limiting
-
-\* Global Exception Handling
-
-
-
-\---
-
-
-
-\# 🏗️ معماری پروژه
-
-
-
-این پروژه بر اساس اصول \*\*Clean Architecture\*\* طراحی شده است.
-
-
+این پروژه بر اساس اصول **Clean Architecture** طراحی شده است.
 
 ```text
-
 Domain
-
-&#x20;  ↑
-
+   ↑
 Application
-
-&#x20;  ↑
-
+   ↑
 Infrastructure
-
-&#x20;  ↑
-
+   ↑
 API
-
 ```
 
-
-
-\### Domain
-
-
+### Domain
 
 هسته اصلی پروژه و محل قرارگیری Business Logic است.
 
+* Entityها
+* Value Objectها
+* Interfaceهای Domain
+* Exceptionهای اختصاصی
+* قوانین کسب‌وکار
 
+> این لایه نباید به Database، Framework یا Infrastructure وابسته باشد.
 
-شامل:
-
-
-
-\* Entityها
-
-\* Value Objectها
-
-\* Interfaceهای Domain
-
-\* Exceptionهای اختصاصی
-
-\* قوانین کسب‌وکار
-
-
-
-این لایه نباید به Database، Framework یا Infrastructure وابسته باشد.
-
-
-
-\---
-
-
-
-\### Application
-
-
+### Application
 
 شامل Use Caseهای پروژه است.
 
+عملیات‌ها با استفاده از الگوی **CQRS** پیاده‌سازی می‌شوند.
 
+* Commands
+* Queries
+* Handlers
+* Validators
 
-عملیات‌ها با استفاده از الگوی \*\*CQRS\*\* پیاده‌سازی می‌شوند.
-
-
-
-شامل:
-
-
-
-\* Commands
-
-\* Queries
-
-\* Handlers
-
-\* Validators
-
-
-
-\---
-
-
-
-\### Infrastructure
-
-
+### Infrastructure
 
 شامل پیاده‌سازی جزئیات فنی پروژه است.
 
+* Database
+* Entity Framework Core
+* PostgreSQL
+* Redis
+* Authentication
+* Repositoryها
+* External Services
 
+### API
 
-مانند:
+نقطه ورود سیستم است.
 
+* Controllers
+* Middleware
+* Dependency Injection
+* Swagger
+* Error Handling
 
+---
 
-\* Database
+## 🛠️ تکنولوژی‌های پروژه
 
-\* Entity Framework Core
+| بخش               | تکنولوژی                                           |
+| ----------------- | -------------------------------------------------- |
+| **Backend**       | .NET 9, ASP.NET Core Web API, C#                   |
+| **Architecture**  | Clean Architecture, CQRS, Rich Domain Model, SOLID |
+| **Database**      | PostgreSQL, Entity Framework Core                  |
+| **Libraries**     | MediatR, FluentValidation, Redis                   |
+| **Security**      | ASP.NET Core Identity, JWT                         |
+| **Logging**       | Serilog                                            |
+| **Documentation** | Swagger / OpenAPI                                  |
+| **Testing**       | xUnit, FluentAssertions                            |
+| **DevOps**        | Docker, Docker Compose, GitHub Actions             |
 
-\* PostgreSQL
+---
 
-\* Redis
-
-\* Authentication
-
-\* Repositoryها
-
-\* External Services
-
-
-
-\---
-
-
-
-\### API
-
-
-
-نقطه ورود سیستم است و شامل:
-
-
-
-\* Controllers
-
-\* Middleware
-
-\* Dependency Injection
-
-\* Swagger
-
-\* Error Handling
-
-
-
-می‌شود.
-
-
-
-\---
-
-
-
-\# 🚀 هدف پروژه
-
-
+## 🚀 هدف پروژه
 
 هدف نهایی LinkForge ساخت یک Backend حرفه‌ای و قابل توسعه است که مهارت‌های زیر را در یک پروژه عملی نشان دهد:
 
+* Clean Architecture
+* Clean Code
+* SOLID Principles
+* CQRS
+* Database Design
+* Authentication & Authorization
+* Caching
+* Performance Optimization
+* API Design
+* Logging
+* Testing
+* Docker
+* CI/CD
 
+---
 
-\* Clean Architecture
+## 👨‍💻 Author
 
-\* Clean Code
-
-\* SOLID Principles
-
-\* CQRS
-
-\* Database Design
-
-\* Authentication
-
-\* Authorization
-
-\* Caching
-
-\* Performance Optimization
-
-\* API Design
-
-\* Logging
-
-\* Testing
-
-\* Docker
-
-\* CI/CD
-
-
-
-\---
-
-
-
-\# 👨‍💻 Author
-
-
-
-Developed by \*\*Amirhossein Mortezaee\*\*
-
-
-
-\---
-
-
+Developed by **Amirhossein Mortezaee**
 
 ⭐ If you like this project, consider giving it a star!
-
-
-
