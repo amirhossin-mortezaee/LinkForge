@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using UrlShortener.Application.Common.Interfaces;
 using UrlShortener.Domain.Interfaces;
 using UrlShortener.Infrastructure.Persistence;
 using UrlShortener.Infrastructure.Services;
@@ -17,6 +18,9 @@ public static class DependencyInjection
 
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+        services.AddScoped<IApplicationDbContext>(provider =>
+            provider.GetRequiredService<AppDbContext>());
 
         return services;
     }
