@@ -87,5 +87,17 @@
         {
             return ExpiresAt.HasValue && ExpiresAt.Value < DateTime.UtcNow;
         }
+
+        public void UpdateExpiration(DateTime? newExpiresAt)
+        {
+            if (newExpiresAt.HasValue && newExpiresAt.Value <= DateTime.UtcNow)
+            {
+                throw new ArgumentException(
+                    "Expiration date must be in the future.",
+                    nameof(newExpiresAt));
+            }
+
+            ExpiresAt = newExpiresAt;
+        }
     }
 }
