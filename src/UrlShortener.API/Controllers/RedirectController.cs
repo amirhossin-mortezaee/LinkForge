@@ -1,6 +1,5 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using UrlShortener.Application.Common.Exceptions;
 using UrlShortener.Application.Features.Urls.Queries.ResolveShortCode;
 
 namespace UrlShortener.API.Controllers;
@@ -20,18 +19,7 @@ public class RedirectController : ControllerBase
         string shortCode,
         CancellationToken cancellationToken)
     {
-        try
-        {
-            var originalUrl = await _mediator.Send(new ResolveShortCodeQuery(shortCode), cancellationToken);
-            return Redirect(originalUrl);
-        }
-        catch (ShortUrlNotFoundException)
-        {
-            return NotFound();
-        }
-        catch (ShortUrlNotAvailableException)
-        {
-            return StatusCode(410); // Gone — لینک وجود دارد ولی دیگر در دسترس نیست
-        }
+        var originalUrl = await _mediator.Send(new ResolveShortCodeQuery(shortCode), cancellationToken);
+        return Redirect(originalUrl);
     }
 }
