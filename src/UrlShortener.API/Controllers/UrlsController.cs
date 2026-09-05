@@ -40,10 +40,19 @@ public class UrlsController : ControllerBase
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(List<ShortUrlDto>), StatusCodes.Status200OK)]
-    public async Task<ActionResult<List<ShortUrlDto>>> GetAll(CancellationToken cancellationToken)
+    [ProducesResponseType(typeof(PagedResult<ShortUrlDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<PagedResult<ShortUrlDto>>> GetAll(
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 10,
+        [FromQuery] string? search = null,
+        [FromQuery] string? sortBy = null,
+        [FromQuery] bool sortDescending = false,
+        CancellationToken cancellationToken = default)
     {
-        var result = await _mediator.Send(new GetUserUrlsQuery(), cancellationToken);
+        var result = await _mediator.Send(
+            new GetUserUrlsQuery(page, pageSize, search, sortBy, sortDescending),
+            cancellationToken);
         return Ok(result);
     }
 
