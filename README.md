@@ -174,20 +174,20 @@ LinkForge
 * [x] Create Solution
 * [x] Configure Clean Architecture Layers
 * [x] Configure Project References
-* [ ] Create Domain Entities
-* [ ] Implement Short URL Creation
-* [ ] Implement Short Code Generator
-* [ ] Configure Database
-* [ ] Implement Redirect System
-* [ ] Add Authentication
+* [x] Create Domain Entities
+* [x] Implement Short URL Creation
+* [x] Implement Short Code Generator
+* [x] Configure Database (SQL Server + EF Core)
+* [x] Implement Redirect System
+* [x] Add Authentication (ASP.NET Core Identity)
 * [ ] Add JWT Authentication
 * [ ] Add Redis Cache
 * [ ] Add Analytics
 * [ ] Add Rate Limiting
-* [ ] Add Logging
-* [ ] Add Tests
+* [ ] Add Logging (Serilog)
+* [ ] Add Tests (xUnit)
 * [ ] Add Docker Support
-* [ ] Configure CI/CD
+* [ ] Configure CI/CD (GitHub Actions)
 
 ---
 
