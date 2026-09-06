@@ -7,6 +7,7 @@ using UrlShortener.Application.Features.Urls.Commands.DeleteShortUrl;
 using UrlShortener.Application.Features.Urls.Commands.UpdateShortUrl;
 using UrlShortener.Application.Features.Urls.Queries.GetShortUrlById;
 using UrlShortener.Application.Features.Urls.Queries.GetUserUrls;
+using UrlShortener.Domain.Common;
 
 namespace UrlShortener.API.Controllers;
 
@@ -44,7 +45,7 @@ public class UrlsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<PagedResult<ShortUrlDto>>> GetAll(
         [FromQuery] int page = 1,
-        [FromQuery] int pageSize = 10,
+        [FromQuery] int pageSize = ShortUrlConstants.DefaultPageSize,
         [FromQuery] string? search = null,
         [FromQuery] string? sortBy = null,
         [FromQuery] bool sortDescending = false,

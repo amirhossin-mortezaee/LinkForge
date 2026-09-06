@@ -1,19 +1,17 @@
 using FluentValidation;
+using UrlShortener.Domain.Common;
 
 namespace UrlShortener.Application.Features.Urls.Commands.CreateShortUrl;
 
 public class CreateShortUrlCommandValidator : AbstractValidator<CreateShortUrlCommand>
 {
-    private const int MaxAliasLength = 15;
-    private const int MaxUrlLength = 2048;
-
     public CreateShortUrlCommandValidator()
     {
         RuleFor(x => x.OriginalUrl)
             .NotEmpty()
                 .WithMessage("Original URL is required.")
-            .MaximumLength(MaxUrlLength)
-                .WithMessage($"Original URL must not exceed {MaxUrlLength} characters.")
+            .MaximumLength(ShortUrlConstants.OriginalUrlMaxLength)
+                .WithMessage($"Original URL must not exceed {ShortUrlConstants.OriginalUrlMaxLength} characters.")
             .Must(BeAValidUri)
                 .WithMessage("Original URL is not a valid URL.")
             .Must(HaveHttpOrHttpsScheme)
@@ -21,8 +19,8 @@ public class CreateShortUrlCommandValidator : AbstractValidator<CreateShortUrlCo
                 .When(x => BeAValidUri(x.OriginalUrl));
 
         RuleFor(x => x.CustomAlias)
-            .MaximumLength(MaxAliasLength)
-                .WithMessage($"Custom alias must not exceed {MaxAliasLength} characters.")
+            .MaximumLength(ShortUrlConstants.CustomAliasMaxLength)
+                .WithMessage($"Custom alias must not exceed {ShortUrlConstants.CustomAliasMaxLength} characters.")
             .Matches("^[a-zA-Z0-9_-]+$")
                 .WithMessage("Custom alias can only contain letters, digits, hyphens, and underscores.")
             .When(x => !string.IsNullOrEmpty(x.CustomAlias));
