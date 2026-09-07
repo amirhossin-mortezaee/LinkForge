@@ -54,21 +54,24 @@ public class ExceptionHandlingMiddleware
         await context.Response.WriteAsJsonAsync(problemDetails);
     }
 
-    private static (int StatusCode, string Title, string Detail) MapException(Exception exception) => exception switch
-    {
-        FluentValidation.ValidationException vex =>
-            (StatusCodes.Status400BadRequest, "Validation Error", vex.Message),
+private static (int StatusCode, string Title, string Detail) MapException(Exception exception) => exception switch
+        {
+            FluentValidation.ValidationException vex =>
+                (StatusCodes.Status400BadRequest, "Validation Error", vex.Message),
 
-        DuplicateShortCodeException dex =>
-            (StatusCodes.Status409Conflict, "Duplicate Short Code", dex.Message),
+            DuplicateShortCodeException dex =>
+                (StatusCodes.Status409Conflict, "Duplicate Short Code", dex.Message),
 
-        ShortUrlNotFoundException nfex =>
-            (StatusCodes.Status404NotFound, "Not Found", nfex.Message),
+            ShortUrlNotFoundException nfex =>
+                (StatusCodes.Status404NotFound, "Not Found", nfex.Message),
 
-        ShortUrlNotAvailableException nex =>
-            (StatusCodes.Status410Gone, "Link No Longer Available", nex.Message),
+            ShortUrlNotAvailableException nex =>
+                (StatusCodes.Status410Gone, "Link No Longer Available", nex.Message),
 
-        _ => (StatusCodes.Status500InternalServerError, "An unexpected error occurred",
-              "An unexpected error occurred. Please try again later.")
-    };
+            RegistrationFailedException rex =>
+                (StatusCodes.Status400BadRequest, "Registration Failed", rex.Message),
+
+            _ => (StatusCodes.Status500InternalServerError, "An unexpected error occurred",
+                  "An unexpected error occurred. Please try again later.")
+        };
 }

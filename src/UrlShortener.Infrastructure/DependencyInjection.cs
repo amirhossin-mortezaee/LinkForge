@@ -17,6 +17,7 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         services.AddScoped<IShortCodeGenerator, ShortCodeGenerator>();
+        services.AddScoped<IIdentityService, IdentityService>();
 
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
