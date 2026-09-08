@@ -3,12 +3,12 @@ namespace UrlShortener.Application.Common.Exceptions;
 public class ShortUrlNotFoundException : Exception
 {
     public ShortUrlNotFoundException(Guid id)
-        : base($"No short URL found for id '{id}'.")
+        : base($"لینک کوتاه با شناسه '{id}' یافت نشد.")
     {
     }
 
     public ShortUrlNotFoundException(string shortCode)
-        : base($"No short URL found for code '{shortCode}'.")
+        : base($"لینک کوتاه با کد '{shortCode}' یافت نشد.")
     {
     }
 }

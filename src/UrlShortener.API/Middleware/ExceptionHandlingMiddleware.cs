@@ -54,7 +54,7 @@ public class ExceptionHandlingMiddleware
         await context.Response.WriteAsJsonAsync(problemDetails);
     }
 
-private static (int StatusCode, string Title, string Detail) MapException(Exception exception) => exception switch
+    private static (int StatusCode, string Title, string Detail) MapException(Exception exception) => exception switch
         {
             FluentValidation.ValidationException vex =>
                 (StatusCodes.Status400BadRequest, "Validation Error", vex.Message),
@@ -70,6 +70,9 @@ private static (int StatusCode, string Title, string Detail) MapException(Except
 
             RegistrationFailedException rex =>
                 (StatusCodes.Status400BadRequest, "Registration Failed", rex.Message),
+
+            InvalidCredentialsException icex =>
+                (StatusCodes.Status401Unauthorized, "Unauthorized", icex.Message),
 
             _ => (StatusCodes.Status500InternalServerError, "An unexpected error occurred",
                   "An unexpected error occurred. Please try again later.")

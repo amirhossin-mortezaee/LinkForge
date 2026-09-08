@@ -20,4 +20,17 @@ public class IdentityService : IIdentityService
 
         return (result.Succeeded, user.Id, result.Errors.Select(e => e.Description));
     }
+
+    public async Task<Guid?> ValidateCredentialsAsync(string email, string password)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+        if (user is null)
+            return null;
+
+        var isPasswordValid = await _userManager.CheckPasswordAsync(user, password);
+        if (!isPasswordValid)
+            return null;
+
+        return user.Id;
+    }
 }

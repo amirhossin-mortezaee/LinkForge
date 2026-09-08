@@ -7,15 +7,15 @@ public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
     public RegisterCommandValidator()
     {
         RuleFor(x => x.Email)
-            .NotEmpty().WithMessage("Email is required.")
-            .EmailAddress().WithMessage("A valid email address is required.");
+            .NotEmpty().WithMessage("ایمیل الزامی است.")
+            .EmailAddress().WithMessage("یک آدرس ایمیل معتبر الزامی است.");
 
         RuleFor(x => x.Password)
-            .NotEmpty().WithMessage("Password is required.")
-            .MinimumLength(8).WithMessage("Password must be at least 8 characters long.");
+            .NotEmpty().WithMessage("رمز عبور الزامی است.")
+            .MinimumLength(8).WithMessage("رمز عبور باید حداقل 8 کاراکتر باشد.");
 
         RuleFor(x => x.ConfirmPassword)
-            .NotEmpty().WithMessage("Please confirm your password.")
-            .Equal(x => x.Password).WithMessage("Passwords do not match.");
+            .NotEmpty().WithMessage("تایید رمز عبور الزامی است.")
+            .Equal(x => x.Password).WithMessage("رمز عبور و تایید آن یکسان نیستند.");
     }
 }

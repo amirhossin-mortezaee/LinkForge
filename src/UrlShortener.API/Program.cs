@@ -1,20 +1,50 @@
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Localization;
 using UrlShortener.Application;
+using UrlShortener.Application.Common.Interfaces;
 using UrlShortener.Infrastructure;
 using UrlShortener.API.Middleware;
+using UrlShortener.API.Resources;
+using UrlShortener.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add localization
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[]
+    {
+        new CultureInfo("fa"),
+        new CultureInfo("en")
+    };
+
+    options.DefaultRequestCulture = new RequestCulture("fa");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+    options.RequestCultureProviders = new List<IRequestCultureProvider>
+    {
+        new QueryStringRequestCultureProvider(),
+        new AcceptLanguageHeaderRequestCultureProvider(),
+        new CookieRequestCultureProvider()
+    };
+});
+
 // Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddScoped<ILocalizationService, LocalizationService>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseRequestLocalization();
+
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())

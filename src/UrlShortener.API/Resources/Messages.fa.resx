@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>ایمیل الزامی است.</value>
+  </data>
+  <data name="ValidEmailRequired" xml:space="preserve">
+    <value>یک آدرس ایمیل معتبر الزامی است.</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>رمز عبور الزامی است.</value>
+  </data>
+  <data name="PasswordMinLength" xml:space="preserve">
+    <value>رمز عبور باید حداقل {0} کاراکتر باشد.</value>
+  </data>
+  <data name="ConfirmPasswordRequired" xml:space="preserve">
+    <value>تایید رمز عبور الزامی است.</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>رمز عبور و تایید آن یکسان نیستند.</value>
+  </data>
+  <data name="InvalidCredentials" xml:space="preserve">
+    <value>ایمیل یا رمز عبور نادرست است.</value>
+  </data>
+  <data name="RegistrationFailed" xml:space="preserve">
+    <value>ثبت‌نام با خطا مواجه شد: {0}</value>
+  </data>
+  <data name="ShortUrlNotFound" xml:space="preserve">
+    <value>لینک کوتاه یافت نشد.</value>
+  </data>
+  <data name="ShortUrlNotAvailable" xml:space="preserve">
+    <value>این لینک دیگر در دسترس نیست.</value>
+  </data>
+  <data name="DuplicateShortCode" xml:space="preserve">
+    <value>کد کوتاه قبلاً وجود دارد.</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>خطای غیرمنتظره‌ای رخ داد. لطفاً بعداً تلاش کنید.</value>
+  </data>
+</root>
