@@ -26,7 +26,7 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginCommand command, CancellationToken cancellationToken)
     {
-        var userId = await _mediator.Send(command, cancellationToken);
-        return Ok(new { userId });
+        var result = await _mediator.Send(command, cancellationToken);
+        return Ok(new { token = result.Token, expiresAt = result.ExpiresAt });
     }
 }

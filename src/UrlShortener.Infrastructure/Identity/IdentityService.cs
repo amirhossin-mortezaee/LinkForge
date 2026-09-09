@@ -21,7 +21,7 @@ public class IdentityService : IIdentityService
         return (result.Succeeded, user.Id, result.Errors.Select(e => e.Description));
     }
 
-    public async Task<Guid?> ValidateCredentialsAsync(string email, string password)
+    public async Task<(Guid Id, string Email)?> ValidateCredentialsAsync(string email, string password)
     {
         var user = await _userManager.FindByEmailAsync(email);
         if (user is null)
@@ -31,6 +31,24 @@ public class IdentityService : IIdentityService
         if (!isPasswordValid)
             return null;
 
-        return user.Id;
+        return (user.Id, user.Email!);
+    }
+
+    public async Task<(Guid Id, string Email)?> FindUserByIdAsync(Guid userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId.ToString());
+        if (user is null)
+            return null;
+
+        return (user.Id, user.Email!);
+    }
+
+    public async Task<(Guid Id, string Email)?> FindUserByEmailAsync(string email)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+        if (user is null)
+            return null;
+
+        return (user.Id, user.Email!);
     }
 }
