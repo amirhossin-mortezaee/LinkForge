@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using UrlShortener.Application.Features.Auth.Commands.Login;
+using UrlShortener.Application.Features.Auth.Commands.RefreshToken;
 using UrlShortener.Application.Features.Auth.Commands.Register;
 
 namespace UrlShortener.API.Controllers;
@@ -27,6 +28,15 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Login(LoginCommand command, CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(command, cancellationToken);
-        return Ok(new { token = result.Token, expiresAt = result.ExpiresAt });
+        return Ok(new { token = result.Token, expiresAt = result.ExpiresAt, refreshToken = result.RefreshToken });
+    }
+
+    [HttpPost("refresh")]
+    public async Task<IActionResult> Refresh(
+        [FromBody] RefreshTokenCommand command,
+        CancellationToken cancellationToken)
+    {
+        var result = await _mediator.Send(command, cancellationToken);
+        return Ok(new { token = result.Token, expiresAt = result.ExpiresAt, refreshToken = result.RefreshToken });
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Localization;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using UrlShortener.Application;
+using UrlShortener.Application.Common;
 using UrlShortener.Application.Common.Interfaces;
 using UrlShortener.Infrastructure;
 using UrlShortener.API.Middleware;
@@ -44,6 +45,18 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddScoped<ILocalizationService, LocalizationService>();
 
+// Options Pattern برای JwtSettings (RefreshTokenExpiryDays از همین‌جا میاد)
+builder.Services.Configure<JwtSettings>(options =>
+{
+    options.Issuer = builder.Configuration["JwtSettings:Issuer"] ?? string.Empty;
+    options.Audience = builder.Configuration["JwtSettings:Audience"] ?? string.Empty;
+    options.SecretKey = builder.Configuration["JwtSettings:SecretKey"]
+        ?? builder.Configuration["JwtSettings:Secret"] ?? string.Empty;
+    options.ExpiryMinutes = builder.Configuration.GetValue<int>("JwtSettings:ExpiryMinutes");
+    var days = builder.Configuration.GetValue<int>("JwtSettings:RefreshTokenExpiryDays");
+    options.RefreshTokenExpiryDays = days <= 0 ? 7 : days;
+});
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -60,7 +73,9 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
         ValidAudience = builder.Configuration["JwtSettings:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Secret"]!)),
+            Encoding.UTF8.GetBytes(
+                builder.Configuration["JwtSettings:SecretKey"]
+                ?? builder.Configuration["JwtSettings:Secret"]!)),
         ClockSkew = TimeSpan.FromMinutes(1)
     };
 });

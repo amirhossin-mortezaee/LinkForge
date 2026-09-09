@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using UrlShortener.Application.Common.Exceptions;
+using UrlShortener.Domain.Exceptions;
 
 namespace UrlShortener.API.Middleware;
 
@@ -73,6 +74,9 @@ public class ExceptionHandlingMiddleware
 
             InvalidCredentialsException icex =>
                 (StatusCodes.Status401Unauthorized, "Unauthorized", icex.Message),
+
+            InvalidRefreshTokenException rtex =>
+                (StatusCodes.Status401Unauthorized, "Unauthorized", rtex.Message),
 
             _ => (StatusCodes.Status500InternalServerError, "An unexpected error occurred",
                   "An unexpected error occurred. Please try again later.")

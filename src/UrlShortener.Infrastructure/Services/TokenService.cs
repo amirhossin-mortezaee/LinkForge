@@ -19,7 +19,8 @@ public class TokenService : ITokenService
 
     public (string Token, DateTime ExpiresAt) GenerateAccessToken(Guid userId, string email)
     {
-        var secret = _configuration["JwtSettings:Secret"]
+        var secret = _configuration["JwtSettings:SecretKey"]
+            ?? _configuration["JwtSettings:Secret"]
             ?? throw new InvalidOperationException("JWT Secret is not configured.");
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
